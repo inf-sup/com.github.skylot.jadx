@@ -1,0 +1,1 @@
+../resources/shell/run/run.sh

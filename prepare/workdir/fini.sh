@@ -1,0 +1,1 @@
+../resources/shell/fini/fini.sh

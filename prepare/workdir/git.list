@@ -1,0 +1,12 @@
+# example:
+# [project]
+# url=https://github.com/organization/project.git
+# version=v1.2.3
+# commit=0123456789abcdef0123456789abcdef01234567
+# 其中url和version为必填项
+# github 和 kde 的 commit 可不填
+
+[jadx]
+url=https://github.com/skylot/jadx.git
+version=v1.5.0
+commit=
