@@ -1,0 +1,31 @@
+version: "1"
+
+package:
+  id: REPLACE_PACKAGE_ID
+  name: REPLACE_PACKAGE_NAME
+  version: REPLACE_PACKAGE_VERSION
+  kind: app
+  description: |
+    REPLACE_PACKAGE_DESCRIPTION
+
+base: org.deepin.foundation/23.0.0
+runtime: org.deepin.Runtime/23.0.1
+## TODO
+##base: REPLACE_BASE
+##runtime: REPLACE_RUNTIME
+
+command:
+  - REPLACE_COMMAND
+
+
+build: |
+  ## build-body
+  ## build-body/
+
+
+sources:
+  ## git-source
+  ## git-source/
+  ## file-source
+  ## file-source/
+  

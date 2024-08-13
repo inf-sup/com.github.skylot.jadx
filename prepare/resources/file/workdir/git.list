@@ -1,0 +1,17 @@
+# example:
+# [project]
+# url=https://github.com/organization/project.git
+# version=v1.2.3
+# commit=0123456789abcdef0123456789abcdef01234567
+# 其中url和version为必填项
+# github 和 kde 的 commit 可不填
+
+[ninja]
+url=https://github.com/ninja-build/ninja.git
+version=v1.12.1
+commit=
+
+[]
+url=
+version=
+commit=

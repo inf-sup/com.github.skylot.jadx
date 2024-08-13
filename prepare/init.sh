@@ -1,0 +1,1 @@
+../prepare/resources/shell/init/init.sh
