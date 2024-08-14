@@ -38,11 +38,12 @@ cd $dir
 gen_yaml="$dir/prepare/resources/shell/gen_yaml/gen_yaml.sh"
 info="$dir/prepare/workdir/project.info"
 git_list="$dir/prepare/workdir/git.list"
+file_list="$dir/prepare/workdir/file.list"
 pkg_list="$dir/prepare/workdir/pkg.list"
 build_sh="$dir/prepare/workdir/build.sh"
 
 if [ -n "$yaml" ]; then
-    bash $gen_yaml $info $git_list $pkg_list $build_sh "$dir/linglong.yaml"
+    bash $gen_yaml $info $git_list $file_list $pkg_list $build_sh "$dir/linglong.yaml"
 fi
 
 case $mode in

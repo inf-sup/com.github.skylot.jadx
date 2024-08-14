@@ -37,7 +37,7 @@ while IFS= read -r line; do
         commit="${line#*=}"
         c="set"
     fi
-    # 输出至 output $3
+    # 输出至 output $2
     if [ -n "$name" ] && [ -n "$u" ] && [ -n "$v" ]; then
         # TODO 处理version为空
         if [ -z "$commit" ]; then

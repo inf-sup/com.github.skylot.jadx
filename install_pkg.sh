@@ -11,7 +11,7 @@ function help() {
     echo "    -r '\-dev|pkg1|pkg2...' 需要删除的deb包的正则表达式"
     echo "    -p PATH 安装路径"
     echo "    -I 'pkg1,pkg2...' 需要强制安装的deb包列表, 以逗号分隔, 不受-E影响"
-    echo "    -E 'pkg1,pkg2...' 需要排除的deb包列表, 以逗号分隔"
+    echo "    -E 'pkg1,pkg2...'|'*' 需要排除的deb包列表, 以逗号分隔, 参数为'*'时排除所有包"
     echo "    -L LOGS 安装记录存放目录"
     echo "    -D 删除安装记录"
     echo "    -h 打印帮助信息"
@@ -39,6 +39,7 @@ function install() {
     skipped_list="$deb_trace_dir/0_skipped.list"
     mkdir $deb_trace_dir
     touch $skipped_list
+    echo "-----${temp_dir##*.}-----" > $skipped_list
     # 生成文件列表
     find "$deb_dir" -type f -name "*.deb" >"$deb_list_file"
     echo "$include" | tr ',' '\n' >"$include_list_file"
@@ -63,8 +64,8 @@ function install() {
         # 获取包名
         pkg=$(tar -xf "$control_file" ./control -O | grep '^Package:' | awk '{print $2}')
         rm "$control_file"
-        # 如果包含在exclude列表, 并且不包含在include列表则跳过安装
-        if grep -q "^$pkg$" "$exclude_list_file" && ! grep -q "^$pkg$" "$include_list_file"; then
+        # 如果exclude中含星号*或deb包含在exclude列表中, 且不包含在include列表则跳过安装
+        if grep -q "^$pkg$\|*" "$exclude_list_file" && ! grep -q "^$pkg$" "$include_list_file"; then
             echo " skip"
             echo "$file" >>$skipped_list
         else
@@ -131,7 +132,9 @@ function install() {
     done <"$deb_list_file"
 
     # 复制安装记录
-    cp -r "$deb_trace_dir" "$logs"
+    mkdir -p "$logs"
+    cat "$skipped_list" >> "$logs/$(basename $skipped_list)"
+    cp -r "$deb_trace_dir"/*.deb.list "$logs" 2>/dev/null || true
     # 清理临时目录
     rm -r "$temp_dir"
 }

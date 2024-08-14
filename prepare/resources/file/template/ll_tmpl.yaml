@@ -26,6 +26,9 @@ build: |
 sources:
   ## git-source
   ## git-source/
+  # files
   ## file-source
   ## file-source/
+  ## pkg-source
+  ## pkg-source/
   

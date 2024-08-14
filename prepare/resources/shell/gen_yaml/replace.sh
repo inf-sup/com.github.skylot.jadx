@@ -16,12 +16,12 @@ replace_list="$dir/prepare/resources/file/template/replace.list"
 
 
 # 读取 project.info
-unset -v $(cat $replace_list | tr '\n' ' ')
+unset -v $(cat $replace_list | grep -v '^#' | tr '\n' ' ')
 while IFS= read -r line; do
     if grep -qE '^[^=]+=[^=]+$' <<< "$line"; then
         key="REPLACE_${line%=*}"
         val="${line#*=}"
-        if grep -q "$key" "$replace_list"; then
+        if grep -q "^$key$" "$replace_list"; then
             eval "$key=\"$val\""
         fi
     fi
