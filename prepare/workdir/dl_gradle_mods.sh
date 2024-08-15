@@ -7,7 +7,12 @@ function get_res_info() {
     path="$2"
     url="$3"
     hd "$in" -e '32/1 "%_p"' | grep files | sed -E 's/\.{2,}/\n/g' | grep '^file' > "$path"
-    hd "$in" -e '32/1 "%_p"' | grep files | sed -E 's/\.{2,}/\n/g' | grep '^http' | xargs -I@ curl -sLI -w '%{url_effective}\n' -o /dev/null @ > "$url"
+    #hd "$in" -e '32/1 "%_p"' | grep files | sed -E 's/\.{2,}/\n/g' | grep '^http' | xargs -I@ curl -sLI -w '%{url_effective}\n' -o /dev/null @ > "$url"
+    hd "$in" -e '32/1 "%_p"' | grep files | sed -E 's/\.{2,}/\n/g' | grep '^http' | 
+        sed -E 's#https://repo[0-9]?\.maven\.org/maven2/#https://maven\.aliyun\.com/repository/public/#g' |
+        sed -E 's#https://jcenter\.bintray\.com/#https://maven\.aliyun\.com/repository/public/#g' |
+        sed -E 's#https://repo\.maven\.apache\.org/maven2/#https://maven\.aliyun\.com/repository/public/#g' |
+        sed -E 's#https://plugins\.gradle\.org/m2/#https://maven\.aliyun\.com/repository/gradle-plugin/#g' > "$url"
 }
 
 
