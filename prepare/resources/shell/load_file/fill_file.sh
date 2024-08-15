@@ -34,7 +34,8 @@ while IFS= read -r line; do
         if [ -z "$digest" ]; then
             temp_dir=$(mktemp -d)
             cd "$temp_dir"
-            wget -q "$url"
+            #wget -q "$url"
+            aria2c -x4 "$url" 1>&2
             hash_name=($(sha256sum ./* 2>/dev/null))
             if [ -z "$hash_name" ]; then
                 echo "ERROR: ($(basename $0))"

@@ -1,10 +1,3 @@
-# install packages
-install_pkg=$(realpath "./install_pkg.sh")
-include_pkg=''
-exclude_pkg=''
-bash $install_pkg -i -d $(realpath 'linglong/sources') -p $PREFIX/jdk -I \"$include_pkg\" -E \"$exclude_pkg\"
-export LD_LIBRARY_PATH=$PREFIX/lib/$TRIPLET:$LD_LIBRARY_PATH
-
 # jdk 17
 cd /project/linglong/sources
 tar -xf openjdk-17.0.2_linux-x64_bin.tar.gz -C .
@@ -20,8 +13,16 @@ export GRADLE_USER_HOME=/project/linglong/sources/gradle
 # build jadx
 cd /project/linglong/sources/jadx.git
 export "JADX_VERSION=1.5.0"
-sed -i 's#\(distributionUrl\)=\([^=]*\)#\1=https\\://mirrors.cloud.tencent.com/gradle/gradle-8.7-bin.zip#' gradle/wrapper/gradle-wrapper.properties
-./gradlew dist
+sed -i 's#\(distributionUrl\)=\([^=]*\)#\1=file\\:///project/linglong/sources/gradle-8.7-bin.zip#' gradle/wrapper/gradle-wrapper.properties
+tar -zxf /project/gradle.tar.gz -C $(dirname $GRADLE_USER_HOME)
+while IFS= read -r line; do
+    pre="$GRADLE_USER_HOME/caches/modules-2"
+    dir="$pre/$(dirname $line)"
+    name=$(basename $line)
+    mkdir -p $dir
+    cp "../$name" "$dir/$name"
+done < "/project/res.list"
+./gradlew dist --offline
 cp -r build/jadx/* $PREFIX
 sed -i "s|#!/usr/bin/env sh|#!/usr/bin/env sh\nJAVA_HOME=$jre|" $PREFIX/bin/jadx-gui
 
@@ -47,6 +48,3 @@ ls $icon_source | grep px.png | sed "s#^.*[^0-9]\([0-9]*\)px[^.]*\.\([^.]*\)\$#$
 # jre
 jd=$($jdeps -q --multi-release 17 --ignore-missing-deps --print-module-deps $JAVA_HOME/jmods build/jadx/lib/jadx-$JADX_VERSION-all.jar)
 $jlink --module-path $JAVA_HOME/jmods --add-modules $jd --output $jre
-
-# uninstall dev packages
-bash $install_pkg -u -r '.*'
