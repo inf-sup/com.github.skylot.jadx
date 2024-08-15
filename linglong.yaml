@@ -45,7 +45,7 @@ build: |
   sed -i "s|#!/usr/bin/env sh|#!/usr/bin/env sh\nJAVA_HOME=$jre|" $PREFIX/bin/jadx-gui
   
   # desktop
-  mkdir -p $PREFIX/share/application
+  mkdir -p $PREFIX/share/applications
   {
       echo "[Desktop Entry]"
       echo "Exec=jadx-gui"
@@ -54,7 +54,7 @@ build: |
       echo "Comment=Dex to Java decompiler"
       echo "Icon=jadx"
       echo "Name=jadx"
-  } >$PREFIX/share/application/jadx.desktop
+  } >$PREFIX/share/applications/jadx.desktop
   icon_target=$PREFIX/share/icons/hicolor
   icon_source=jadx-gui/src/main/resources/logos
   icon_name=jadx
@@ -69,6 +69,11 @@ build: |
 
 
 sources:
+  # jadx
+  - kind: git
+    url: https://github.com/skylot/jadx.git
+    version: v1.5.0
+    commit: f2ea6415c9228523eab1be4b1359eef43ba64372
   # files
   - kind: file
     url: https://mirrors.huaweicloud.com/openjdk/17.0.2/openjdk-17.0.2_linux-x64_bin.tar.gz

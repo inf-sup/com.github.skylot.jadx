@@ -27,7 +27,7 @@ cp -r build/jadx/* $PREFIX
 sed -i "s|#!/usr/bin/env sh|#!/usr/bin/env sh\nJAVA_HOME=$jre|" $PREFIX/bin/jadx-gui
 
 # desktop
-mkdir -p $PREFIX/share/application
+mkdir -p $PREFIX/share/applications
 {
     echo "[Desktop Entry]"
     echo "Exec=jadx-gui"
@@ -36,7 +36,7 @@ mkdir -p $PREFIX/share/application
     echo "Comment=Dex to Java decompiler"
     echo "Icon=jadx"
     echo "Name=jadx"
-} >$PREFIX/share/application/jadx.desktop
+} >$PREFIX/share/applications/jadx.desktop
 icon_target=$PREFIX/share/icons/hicolor
 icon_source=jadx-gui/src/main/resources/logos
 icon_name=jadx
