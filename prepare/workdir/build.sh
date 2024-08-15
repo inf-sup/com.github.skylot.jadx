@@ -5,13 +5,15 @@ exclude_pkg=''
 bash $install_pkg -i -d $(realpath 'linglong/sources') -p $PREFIX/jdk -I \"$include_pkg\" -E \"$exclude_pkg\"
 export LD_LIBRARY_PATH=$PREFIX/lib/$TRIPLET:$LD_LIBRARY_PATH
 
-# java home when building
-export JAVA_HOME=$PREFIX/jdk/lib/jvm/java-11-openjdk-amd64
-# jre runtime
-jre=$PREFIX/lib/jre
+# jdk 17
+cd /project/linglong/sources
+tar -xf openjdk-17.0.2_linux-x64_bin.tar.gz -C .
+export JAVA_HOME="/project/linglong/sources/jdk-17.0.2"
 # tools path
 jdeps=$JAVA_HOME/bin/jdeps
 jlink=$JAVA_HOME/bin/jlink
+# jre dir
+jre=$PREFIX/lib/jre
 # gradle home
 export GRADLE_USER_HOME=/project/linglong/sources/gradle
 
@@ -43,9 +45,8 @@ ls $icon_source | grep px.png | sed "s#^.*[^0-9]\([0-9]*\)px[^.]*\.\([^.]*\)\$#$
 ls $icon_source | grep px.png | sed "s#^.*[^0-9]\([0-9]*\)px[^.]*\.\([^.]*\)\$#$icon_source/\0 $icon_target/\1x\1/apps/$icon_name.\2#" | xargs -n 2 cp
 
 # jre
-jd=$($jdeps -q --multi-release 11 --ignore-missing-deps --print-module-deps $JAVA_HOME/jmods build/jadx/lib/jadx-$JADX_VERSION-all.jar)
+jd=$($jdeps -q --multi-release 17 --ignore-missing-deps --print-module-deps $JAVA_HOME/jmods build/jadx/lib/jadx-$JADX_VERSION-all.jar)
 $jlink --module-path $JAVA_HOME/jmods --add-modules $jd --output $jre
-cp $JAVA_HOME/lib/server/libjvm.so $jre/lib/server/libjvm.so
 
 # uninstall dev packages
 bash $install_pkg -u -r '.*'
