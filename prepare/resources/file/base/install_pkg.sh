@@ -3,13 +3,14 @@ set -e
 
 function help() {
     echo "usage:"
-    echo "$(basename $0) -i -d DEB -p PATH [-I INCLUDE] [-E EXCLUDE] [-L LOGS]"
+    echo "$(basename $0) -i -d DEB -p PATH [-R] [-I INCLUDE] [-E EXCLUDE] [-L LOGS]"
     echo "$(basename $0) -u -r REGEX [-L LOG] [-D]"
     echo "    -i 安装deb包"
     echo "    -u 删除已安装的deb包"
     echo "    -d DIR 待安装deb包目录"
     echo "    -r '\-dev|pkg1|pkg2...' 需要删除的deb包的正则表达式"
     echo "    -p PATH 安装路径"
+    echo "    -R 安装时修复RUNPATH"
     echo "    -I 'pkg1,pkg2...' 需要强制安装的deb包列表, 以逗号分隔, 不受-E影响"
     echo "    -E 'pkg1,pkg2...'|'*' 需要排除的deb包列表, 以逗号分隔, 参数为'*'时排除所有包"
     echo "    -L LOGS 安装记录存放目录"
@@ -109,6 +110,16 @@ function install() {
                     patchelf --set-rpath "$newRunpath" "$file"
                     echo "    FIX RUNPATH" "$file" "$runpath" "=>" "$newRunpath"
                 fi
+                # +
+                # 如果启用了 -R 选项则修复 RUNPATH
+                if [ -n "$rpath" ]; then
+                    newRunpath="$ins_path/lib/$TRIPLET"
+                    if ldd "$file" | grep -q 'not found'; then
+                        patchelf --set-rpath "$newRunpath" "$file"
+                        echo "    FIX RUNPATH" "$file" "$newRunpath"
+                    fi
+                fi
+                # +/
             done
             # +
             # 修复引入 kf5doctools 及其依赖后 SGML xsl XML等文件
@@ -168,14 +179,15 @@ function uninstall() {
     fi
 }
 
-unset -v mode deb_dir path include exclude logs regex del_log
+unset -v mode deb_dir path rpath include exclude logs regex del_log
 
-while getopts 'hiud:p:I:E:L:r:D' OPT; do
+while getopts 'hiud:p:RI:E:L:r:D' OPT; do
     case $OPT in
     i) mode="install" ;;
     u) mode="uninstall" ;;
     d) deb_dir="$OPTARG" ;;
     p) path="$OPTARG" ;;
+    R) rpath="true" ;;
     I) include="${OPTARG//\"/}" ;;
     E) exclude="${OPTARG//\"/}" ;;
     L) logs="$OPTARG" ;;

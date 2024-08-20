@@ -30,7 +30,7 @@ while IFS= read -r line; do
         d="set"
     fi
     # 输出至 output $2
-    if [ -n "$u" ] && [ -n "$d" ]; then
+    if [ -n "$url" ] && [ -n "$d" ]; then
         if [ -z "$digest" ]; then
             temp_dir=$(mktemp -d)
             cd "$temp_dir"

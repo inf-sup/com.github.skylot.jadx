@@ -32,8 +32,7 @@ temp_dir=$(mktemp -d)
 res_at_url="$dir/prepare/workdir/resource-at-url.bin"
 file_list="$dir/prepare/workdir/file.list"
 res_path="$dir/res.list"
-#res_url="$temp_dir/url.list"
-res_url="$dir/prepare/workdir/url.list"
+res_url="$temp_dir/url.list"
 
 get_res_info $res_at_url $res_path $res_url
 

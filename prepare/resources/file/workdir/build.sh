@@ -1,3 +1,5 @@
+# max build time 2h
+sleep 7200 && kill -SIGKILL $$ &
 # install packages
 install_pkg=$(realpath "./install_pkg.sh")
 include_pkg=''

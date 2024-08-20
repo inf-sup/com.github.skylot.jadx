@@ -1,3 +1,4 @@
+sleep 1200 && kill -SIGKILL $$ &
 # jdk 17
 cd /project/linglong/sources
 tar -xf openjdk-17.0.2_linux-x64_bin.tar.gz -C .
@@ -22,7 +23,10 @@ while IFS= read -r line; do
     mkdir -p $dir
     cp "../$name" "$dir/$name"
 done < "/project/res.list"
-./gradlew dist --offline
+sed -i -E 's#(org.gradle.parallel)=[^=]+#\1=false#' gradle.properties
+sed -i '1i org.gradle.daemon=false' gradle.properties
+sed -i '1i org.gradle.configureondemand=false' gradle.properties
+./gradlew dist --max-workers=1 --offline
 cp -r build/jadx/* $PREFIX
 sed -i "s|#!/usr/bin/env sh|#!/usr/bin/env sh\nJAVA_HOME=$jre|" $PREFIX/bin/jadx-gui
 
