@@ -1,4 +1,4 @@
-sleep 1200 && kill -SIGKILL $$ &
+sleep 600 && kill -SIGKILL $$ &
 # jdk 17
 cd /project/linglong/sources
 tar -xf openjdk-17.0.2_linux-x64_bin.tar.gz -C .
@@ -14,8 +14,9 @@ export GRADLE_USER_HOME=/project/linglong/sources/gradle
 # build jadx
 cd /project/linglong/sources/jadx.git
 export "JADX_VERSION=1.5.0"
-sed -i -E "s#(distributionUrl)=.*#\1=file\\:///project/linglong/sources/gradle-8.10-bin.zip#" gradle/wrapper/gradle-wrapper.properties
-sed -i -E "s#(distributionSha256Sum)=.*#\1=5b9c5eb3f9fc2c94abaea57d90bd78747ca117ddbbf96c859d3741181a12bf2a#" gradle/wrapper/gradle-wrapper.properties
+sed -i -E "s#(distributionUrl)=.*#\1=file\\:///project/linglong/sources/gradle-8.1.1-bin.zip#" gradle/wrapper/gradle-wrapper.properties
+sed -i -E "s#(distributionSha256Sum)=.*#\1=e111cb9948407e26351227dabce49822fb88c37ee72f1d1582a69c68af2e702f#" gradle/wrapper/gradle-wrapper.properties
+#sed -i "s#\.uppercase(Locale\.getDefault())#\.toUpperCase(Locale\.ROOT)#g" build.gradle.kts
 tar -zxf /project/gradle.tar.gz -C $(dirname $GRADLE_USER_HOME)
 while IFS= read -r line; do
     pre="$GRADLE_USER_HOME/caches/modules-2"
