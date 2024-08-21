@@ -9,11 +9,11 @@ function get_res_info() {
     in="$1"
     path="$2"
     url="$3"
-    hd "$in" -e '32/1 "%_p"' | grep files | sed -E 's/\.{2,}/\n/g' | grep '^file' | sort | uniq > "$path"
+    hd "$in" -e '128/1 "%_p"' | grep files | sed -E 's/\.{2,}/\n/g' | grep '^file' | sort | uniq > "$path"
     # 重定向
     #hd "$in" -e '32/1 "%_p"' | grep files | sed -E 's/\.{2,}/\n/g' | grep '^http' | xargs -I@ curl -sLI -w '%{url_effective}\n' -o /dev/null @ > "$url"
     # aliyun maven mirror
-    hd "$in" -e '32/1 "%_p"' | grep files | sed -E 's/\.{2,}/\n/g' | grep '^http' | 
+    hd "$in" -e '128/1 "%_p"' | grep files | sed -E 's/\.{2,}/\n/g' | grep '^http' | 
         sed -E 's#https://repo[0-9]?\.maven\.org/maven2/#https://maven\.aliyun\.com/repository/public/#g' |
         sed -E 's#https://jcenter\.bintray\.com/#https://maven\.aliyun\.com/repository/public/#g' |
         sed -E 's#https://repo\.maven\.apache\.org/maven2/#https://maven\.aliyun\.com/repository/public/#g' |

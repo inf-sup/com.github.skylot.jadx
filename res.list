@@ -69,10 +69,10 @@ files-2.1/com.github.ben-manes/gradle-versions-plugin/0.51.0/303c4c947b7af51270a
 files-2.1/com.github.ben-manes/gradle-versions-plugin/0.51.0/33ddbcb80435d26e6bd295cf88ff962f6be5eaa5/gradle-versions-plugin-0.51.0.jar
 files-2.1/com.github.ben-manes/gradle-versions-plugin/0.51.0/8e0fca52f2bf5bf33e17dab56fb905ec6f3a3673/gradle-versions-plugin-0.51.0.pom
 files-2.1/com.github.ben-manes.versions/com.github.ben-manes.versions.gradle.plugin/0.51.0/2ad2b7a8823261fb16e4fb39a8f685a6bf03404d/com.github.ben-manes.versions.gradle.plugin-0.51.0.pom
-files-2.1/com.github.johnrengelman.shadow*
 files-2.1/com.github.johnrengelman/shadow/8.1.1/558cee65c3a1b0ac40ecc91ef1f50a14fb7498b9/shadow-8.1.1.jar
 files-2.1/com.github.johnrengelman/shadow/8.1.1/b39cafe72087cfff0526d94b3ca48a9e3fd25a5e/shadow-8.1.1.pom
 files-2.1/com.github.johnrengelman/shadow/8.1.1/e9b802e68d51712d0d12bbead051b97d0c985157/shadow-8.1.1.module
+files-2.1/com.github.johnrengelman.shadow/com.github.johnrengelman.shadow.gradle.plugin/8.1.1/571ff716fec0781e640b8e4fdfea04690caf142f/com.github.johnrengelman.shadow.gradle.plugin-8.1.1.pom
 files-2.1/com.github.weisj/jsvg/1.4.0/3f057f61a79b63015dcdb3ae15f935951e4bedd9/jsvg-1.4.0.jar
 files-2.1/com.github.weisj/jsvg/1.4.0/540b1fe907743e299c6dbc8f9449e9b7e46728b8/jsvg-1.4.0.pom
 files-2.1/com.googlecode.concurrent-trees/concurrent-trees/2.6.1/9b647240522ab67c003de9b6702ca81ac0c15efc/concurrent-trees-2.6.1.jar
