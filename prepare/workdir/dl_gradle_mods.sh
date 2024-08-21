@@ -38,7 +38,7 @@ res_url="$dir/prepare/workdir/url.list"
 get_res_info $res_at_url $res_path $res_url
 
 echo -e "url=https://mirrors.huaweicloud.com/openjdk/17.0.2/openjdk-17.0.2_linux-x64_bin.tar.gz\ndigest=" > $file_list
-echo -e "url=https://mirrors.cloud.tencent.com/gradle/gradle-8.10-bin.zip\ndigest=" >> $file_list
+echo -e "url=https://mirrors.cloud.tencent.com/gradle/gradle-8.2-bin.zip\ndigest=" >> $file_list
 cat $res_url | sort | uniq | xargs -I% echo -e "url=%\ndigest=" >> $file_list
 
 rm -r "$temp_dir"
