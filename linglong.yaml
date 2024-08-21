@@ -16,11 +16,11 @@ command:
 
 
 build: |
-  sleep 1200 && kill -SIGKILL $$ &
+  sleep 600 && kill -SIGKILL $$ &
   # jdk 17
   cd /project/linglong/sources
-  tar -xf openjdk-17.0.2_linux-x64_bin.tar.gz -C .
-  export JAVA_HOME="/project/linglong/sources/jdk-17.0.2"
+  tar -xf openjdk-19.0.2_linux-x64_bin.tar.gz -C .
+  export JAVA_HOME="/project/linglong/sources/jdk-19.0.2"
   # tools path
   jdeps=$JAVA_HOME/bin/jdeps
   jlink=$JAVA_HOME/bin/jlink
@@ -69,7 +69,7 @@ build: |
   ls $icon_source | grep px.png | sed "s#^.*[^0-9]\([0-9]*\)px[^.]*\.\([^.]*\)\$#$icon_source/\0 $icon_target/\1x\1/apps/$icon_name.\2#" | xargs -n 2 cp
   
   # jre
-  jd=$($jdeps -q --multi-release 17 --ignore-missing-deps --print-module-deps $JAVA_HOME/jmods build/jadx/lib/jadx-$JADX_VERSION-all.jar)
+  jd=$($jdeps -q --multi-release 19 --ignore-missing-deps --print-module-deps $JAVA_HOME/jmods build/jadx/lib/jadx-$JADX_VERSION-all.jar)
   $jlink --module-path $JAVA_HOME/jmods --add-modules $jd --output $jre
 
 
@@ -81,8 +81,8 @@ sources:
     commit: f2ea6415c9228523eab1be4b1359eef43ba64372
   # files
   - kind: file
-    url: https://mirrors.huaweicloud.com/openjdk/17.0.2/openjdk-17.0.2_linux-x64_bin.tar.gz
-    digest: 0022753d0cceecacdd3a795dd4cea2bd7ffdf9dc06e22ffd1be98411742fbb44
+    url: https://mirrors.huaweicloud.com/openjdk/19.0.2/openjdk-19.0.2_linux-x64_bin.tar.gz
+    digest: 34cf8d095cc071e9e10165f5c45023f96ec68397fdaabf6c64bfec1ffeee6198
   - kind: file
     url: https://mirrors.cloud.tencent.com/gradle/gradle-8.10-bin.zip
     digest: 5b9c5eb3f9fc2c94abaea57d90bd78747ca117ddbbf96c859d3741181a12bf2a

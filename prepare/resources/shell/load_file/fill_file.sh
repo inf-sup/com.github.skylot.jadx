@@ -54,6 +54,6 @@ while IFS= read -r line; do
             echo "    url: $url"
             echo "    digest: $hash"
         } >> "$output"
-        unset -v u
+        unset -v u d
     fi
 done < <(cat "$file_list")

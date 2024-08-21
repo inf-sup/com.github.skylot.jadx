@@ -1,5 +1,5 @@
-url=https://mirrors.huaweicloud.com/openjdk/17.0.2/openjdk-17.0.2_linux-x64_bin.tar.gz
-digest=0022753d0cceecacdd3a795dd4cea2bd7ffdf9dc06e22ffd1be98411742fbb44
+url=https://mirrors.huaweicloud.com/openjdk/19.0.2/openjdk-19.0.2_linux-x64_bin.tar.gz
+digest=34cf8d095cc071e9e10165f5c45023f96ec68397fdaabf6c64bfec1ffeee6198
 url=https://mirrors.cloud.tencent.com/gradle/gradle-8.10-bin.zip
 digest=5b9c5eb3f9fc2c94abaea57d90bd78747ca117ddbbf96c859d3741181a12bf2a
 url=https://dl.google.com/dl/android/maven2/com/android/tools/build/aapt2-proto/8.3.2-10880808/aapt2-proto-8.3.2-10880808.jar

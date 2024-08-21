@@ -16,9 +16,9 @@ mkdir -p $temp_dir/gradle
 GRADLE_USER_HOME="$dir/linglong/sources/gradle"
 cd "$GRADLE_USER_HOME"
 #cp -r --parents .tmp $temp_dir/gradle
-cp -r --parents caches/modules-2/metadata-2.106/descriptors $temp_dir/gradle
-cp -r --parents caches/modules-2/metadata-2.106/module* $temp_dir/gradle
-cp caches/modules-2/metadata-2.106/resource-at-url.bin $dir/prepare/workdir
+cp -r --parents caches/modules-2/metadata-2*/descriptors $temp_dir/gradle
+cp -r --parents caches/modules-2/metadata-2*/module* $temp_dir/gradle
+cp caches/modules-2/metadata-2*/resource-at-url.bin $dir/prepare/workdir
 
 cd $temp_dir
 tar -zcf $dir/gradle.tar.gz gradle

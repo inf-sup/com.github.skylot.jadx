@@ -1,8 +1,8 @@
-sleep 1200 && kill -SIGKILL $$ &
+sleep 600 && kill -SIGKILL $$ &
 # jdk 17
 cd /project/linglong/sources
-tar -xf openjdk-17.0.2_linux-x64_bin.tar.gz -C .
-export JAVA_HOME="/project/linglong/sources/jdk-17.0.2"
+tar -xf openjdk-19.0.2_linux-x64_bin.tar.gz -C .
+export JAVA_HOME="/project/linglong/sources/jdk-19.0.2"
 # tools path
 jdeps=$JAVA_HOME/bin/jdeps
 jlink=$JAVA_HOME/bin/jlink
@@ -51,5 +51,5 @@ ls $icon_source | grep px.png | sed "s#^.*[^0-9]\([0-9]*\)px[^.]*\.\([^.]*\)\$#$
 ls $icon_source | grep px.png | sed "s#^.*[^0-9]\([0-9]*\)px[^.]*\.\([^.]*\)\$#$icon_source/\0 $icon_target/\1x\1/apps/$icon_name.\2#" | xargs -n 2 cp
 
 # jre
-jd=$($jdeps -q --multi-release 17 --ignore-missing-deps --print-module-deps $JAVA_HOME/jmods build/jadx/lib/jadx-$JADX_VERSION-all.jar)
+jd=$($jdeps -q --multi-release 19 --ignore-missing-deps --print-module-deps $JAVA_HOME/jmods build/jadx/lib/jadx-$JADX_VERSION-all.jar)
 $jlink --module-path $JAVA_HOME/jmods --add-modules $jd --output $jre
