@@ -1,4 +1,4 @@
-sleep 600 && kill -SIGKILL $$ &
+sleep 1200 && kill -SIGKILL $$ &
 # jdk 17
 cd /project/linglong/sources
 tar -xf openjdk-19.0.2_linux-x64_bin.tar.gz -C .
@@ -27,6 +27,7 @@ done < "/project/res.list"
 #sed -i -E 's#(org.gradle.parallel)=.*#\1=false#' gradle.properties
 #sed -i '1i org.gradle.daemon=false' gradle.properties
 #sed -i '1i org.gradle.configureondemand=false' gradle.properties
+export GRADLE_OPTS="-Dorg.gradle.daemon=false $GRADLE_OPTS"
 ./gradlew dist --offline
 cp -r build/jadx/* $PREFIX
 sed -i "s|#!/usr/bin/env sh|#!/usr/bin/env sh\nJAVA_HOME=$jre|" $PREFIX/bin/jadx-gui
